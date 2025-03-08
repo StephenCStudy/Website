@@ -1,7 +1,8 @@
 :root {
-    --primary-color: #1a1a1a;
-    --secondary-color: #2a2a2a;
+    --primary-color: #0a0a0a;
+    --secondary-color: #1a1a1a;
     --text-color: #fff;
+    --accent-color: #00ff00;
 }
 
 body {
@@ -9,14 +10,17 @@ body {
     padding: 0;
     background-color: var(--primary-color);
     color: var(--text-color);
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
 }
 
 .navbar {
-    background-color: var(--secondary-color);
+    background: var(--secondary-color);
     padding: 1rem;
     position: sticky;
     top: 0;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-link {
@@ -24,22 +28,28 @@ body {
     text-decoration: none;
     margin: 0 1rem;
     transition: color 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-link:hover {
-    color: #00ff00;
+    color: var(--accent-color);
+    background: rgba(0, 255, 0, 0.1);
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    position: relative;
 }
 
 h1 {
     text-align: center;
-    color: #00ff00;
-    text-shadow: 0 0 10px #00ff00;
+    color: var(--accent-color);
+    text-shadow: 0 0 20px var(--accent-color);
+    margin-bottom: 3rem;
 }
 
 .movies-container {
@@ -47,18 +57,22 @@ h1 {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
+    position: relative;
 }
 
 .movie-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     padding: 1rem;
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
 }
 
 .movie-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
 }
 
 .movie-poster {
@@ -66,20 +80,26 @@ h1 {
     height: 400px;
     object-fit: cover;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
 }
 
 .view-more {
     display: inline-block;
-    padding: 0.5rem 1rem;
-    background: #00ff00;
+    padding: 0.8rem 1.5rem;
+    background: var(--accent-color);
     color: var(--primary-color);
     text-decoration: none;
     border-radius: 5px;
     margin-top: 1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .view-more:hover {
-    background: #00cc00;
+    background: rgba(0, 255, 0, 0.8);
+    transform: scale(1.05);
 }
 
 .stars {
@@ -88,78 +108,22 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, transparent 25%, rgba(255, 255, 255, 0.1) 50%, transparent 75%);
+    background: radial-gradient(circle at center, transparent 20%, rgba(255, 255, 255, 0.1) 50%, transparent 80%);
     animation: stars 20s linear infinite;
+    z-index: -1;
 }
 
 @keyframes stars {
-    0% { background-position: 0 0; }
-    100% { background-position: 100px 100px; }
-}
-
-.about-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.movie-details {
-    display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.movie-poster-details {
-    width: 300px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.movie-info {
-    flex: 1;
-}
-
-.contact-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.contact-info {
-    margin-bottom: 2rem;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 5px;
-    color: var(--text-color);
-}
-
-.contact-form button {
-    background: #00ff00;
-    color: var(--primary-color);
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.contact-form button:hover {
-    background: #00cc00;
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(100px, 100px) rotate(360deg); }
 }
 
 @media (max-width: 768px) {
     .movies-container {
         grid-template-columns: 1fr;
     }
-    
-    .movie-details {
-        flex-direction: column;
+
+    .movie-card {
+        margin-bottom: 2rem;
     }
 }
